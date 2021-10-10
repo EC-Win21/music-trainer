@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31727.386
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsGUI", "WinFormsGUI\WinFormsGUI.csproj", "{22FCE83F-9152-4ED2-94B2-BA65DE28D113}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsGUI", "WinFormsGUI\WinFormsGUI.csproj", "{22FCE83F-9152-4ED2-94B2-BA65DE28D113}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicTrainer", "MusicTrainer\MusicTrainer\MusicTrainer.csproj", "{E1CAF433-2827-43AC-90AB-1F1D296AE81F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicTrainer", "MusicTrainer\MusicTrainer\MusicTrainer.csproj", "{E1CAF433-2827-43AC-90AB-1F1D296AE81F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{B342360D-DB78-4788-B38E-DA96EA731B54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{E1CAF433-2827-43AC-90AB-1F1D296AE81F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1CAF433-2827-43AC-90AB-1F1D296AE81F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1CAF433-2827-43AC-90AB-1F1D296AE81F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B342360D-DB78-4788-B38E-DA96EA731B54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B342360D-DB78-4788-B38E-DA96EA731B54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B342360D-DB78-4788-B38E-DA96EA731B54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B342360D-DB78-4788-B38E-DA96EA731B54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
