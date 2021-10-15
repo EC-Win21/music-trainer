@@ -13,13 +13,13 @@ namespace WinFormsGUI
 {
     public partial class MainForm : Form
     {
-        private IntervalTrainer _trainer;
+        private PitchTrainer _trainer;
         private int _score;
         public MainForm()
         {
             InitializeComponent();
 
-            _trainer = new IntervalTrainer();
+            _trainer = new PitchTrainer(new TimedMidiPlayer());
 
             KeyUp += OnKeyUp;
         }
@@ -28,22 +28,22 @@ namespace WinFormsGUI
         {
             if (e.KeyCode == Keys.Space)
             {
-                _trainer.PlayRandomRisingInterval();
+                _trainer.Poke();
             }
 
-            if (Keys.D2 <= e.KeyCode && e.KeyCode <= Keys.D9)
+            if (e.KeyCode is >= Keys.D0 and <= Keys.D9)
             {
-                int interval = e.KeyCode - Keys.D2;
+                Interval interval = (Interval)(e.KeyCode - Keys.D0);
 
-                if (_trainer.CorrectInterval == interval)
+                if (_trainer.VerifyInterval(interval))
                 {
                     _score++;
                     label_score.Text = _score.ToString();
                 }
 
-                label_from.Text = "C";
-                label_to.Text = "D";
-                label_interval.Text = "major second";
+                label_from.Text = _trainer.StartTone.LetterWithOctave;
+                label_to.Text = _trainer.EndTone.LetterWithOctave;
+                label_interval.Text = Enum.GetName(_trainer.CorrectInterval);
             }
         }
     }
