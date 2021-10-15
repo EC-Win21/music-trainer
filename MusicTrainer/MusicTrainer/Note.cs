@@ -36,12 +36,12 @@ namespace MusicTrainer
         As,
         Bb,
 
-        B ,
+        B,
     }
 
-    public static class NoteExtentions
+    public static class NoteHelper
     {
-        private static readonly Dictionary<Note, string> Letters = 
+        private static readonly Dictionary<Note, string> Letters =
             new Dictionary<Note, string>
             {
                 {Note.C , "C"},
@@ -63,29 +63,36 @@ namespace MusicTrainer
                 {Note.B , "B"},
             };
 
-        private static readonly Dictionary<Note, int> Midi =
+        private static readonly Dictionary<Note, int> HalfStep =
             new Dictionary<Note, int>
             {
-                {Note.C , 60},
-                {Note.Cs, 61},
-                {Note.Db, 61},
-                {Note.D , 62},
-                {Note.Ds, 63},
-                {Note.Eb, 63},
-                {Note.E , 64},
-                {Note.F , 65},
-                {Note.Fs, 66},
-                {Note.Gb, 66},
-                {Note.G , 67},
-                {Note.Gs, 68},
-                {Note.Ab, 68},
-                {Note.A , 69},
-                {Note.As, 70},
-                {Note.Bb, 70},
-                {Note.B , 71},
+                {Note.C , 0},
+                {Note.Cs, 1},
+                {Note.Db, 1},
+                {Note.D , 2},
+                {Note.Ds, 3},
+                {Note.Eb, 3},
+                {Note.E , 4},
+                {Note.F , 5},
+                {Note.Fs, 6},
+                {Note.Gb, 6},
+                {Note.G , 7},
+                {Note.Gs, 8},
+                {Note.Ab, 8},
+                {Note.A , 9},
+                {Note.As, 10},
+                {Note.Bb, 10},
+                {Note.B , 11},
             };
-
         public static string ToLetter(this Note note) => Letters[note];
-        public static int ToMidi(this Note note) => Midi[note];
+        public static int ToHalfStep(this Note note) => HalfStep[note];
+        public static Note FromHalfStepWithSharpBias(int halfStep)
+        {
+            Debug.Assert(halfStep is >= 0 and <= 11, "halfStep out of bounds");
+            return HalfStep
+                .Where(kv => kv.Value == halfStep)
+                .Select(kv => kv.Key)
+                .First();
+        }
     }
 }

@@ -18,6 +18,16 @@ namespace Tests
             Assert.Equal(61, tone.Midi);
         }
 
+
+        [Fact]
+        public void TestToneEquality()
+        {
+            var cSharp = new Tone(Note.Cs);
+            var dFlat = new Tone(Note.Db);
+
+            Assert.Equal(cSharp.Midi, dFlat.Midi);
+        }
+
         [Fact]
         public void TestToneOneOctaveUp()
         {
@@ -26,29 +36,37 @@ namespace Tests
             Assert.Equal("C♯", tone.Letter);
             Assert.Equal("C♯5", tone.LetterWithOctave);
             Assert.Equal(5, tone.Octave);
-            Assert.Equal(61 + 12, tone.Midi);
+            Assert.Equal(60 + 12 + 1, tone.Midi);
         }
 
         [Fact]
-        public void TestIntervalArithmetic()
+        public void TestToneIntervalAddition()
+        {
+            var interval = Interval.MajorThird;
+            Assert.Equal(4, (int)interval);
+
+            var tone = new Tone(Note.C, 5);
+            var newTone = tone + interval;
+
+            Assert.Equal("E", newTone.Letter);
+            Assert.Equal("E5", newTone.LetterWithOctave);
+            Assert.Equal(5, newTone.Octave);
+            Assert.Equal(60 + 12 + 4, newTone.Midi);
+        }
+
+        [Fact]
+        public void TestToneIntervalSubtraction()
         {
             var interval = Interval.Tritone;
-            var tone = new Tone(Note.D, 5);
-
-            var lower = tone - interval;
-            var higher = tone + interval;
-
             Assert.Equal(6, (int)interval);
 
-            Assert.Equal("A", lower.Letter);
-            Assert.Equal("A4", lower.LetterWithOctave);
-            Assert.Equal(5, lower.Octave);
-            Assert.Equal(69, lower.Midi);
+            var tone = new Tone(Note.C, 4);
+            var lower = tone - interval;
 
-            Assert.Equal("A", higher.Letter);
-            Assert.Equal("A4", higher.LetterWithOctave);
-            Assert.Equal(5, higher.Octave);
-            Assert.Equal(69, higher.Midi);
+            Assert.Equal("F♯", lower.Letter);
+            Assert.Equal("F♯3", lower.LetterWithOctave);
+            Assert.Equal(3, lower.Octave);
+            Assert.Equal(60 - 6, lower.Midi);
         }
     }
 }
