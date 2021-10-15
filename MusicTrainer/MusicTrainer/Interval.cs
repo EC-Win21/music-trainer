@@ -22,4 +22,11 @@ namespace MusicTrainer
         MajorSeventh,
         Octave,
     }
+
+    public static class IntervalHelper{
+        public static string ToText(this Interval interval)
+        {
+            return Enum.GetName(interval);
+        }
+    }
 }

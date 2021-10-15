@@ -43,7 +43,7 @@ namespace WinFormsGUI
 
                 label_from.Text = _trainer.StartTone.LetterWithOctave;
                 label_to.Text = _trainer.EndTone.LetterWithOctave;
-                label_interval.Text = Enum.GetName(_trainer.CorrectInterval);
+                label_interval.Text = _trainer.CorrectInterval.ToText();
             }
         }
     }
