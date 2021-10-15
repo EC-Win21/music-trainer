@@ -19,27 +19,39 @@ namespace WinFormsGUI
         {
             InitializeComponent();
 
-            _trainer = new PitchTrainer(new TimedMidiPlayer());
-
-            KeyUp += OnKeyUp;
-        }
-
-        private void OnKeyUp(object? sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Space)
+            var items = checkedListBox_intervals.Items;
+            foreach (var interval in Enum.GetValues<Interval>())
             {
-                _trainer.Poke();
+                items.Add(interval.ToText());
             }
 
-            if (e.KeyCode is >= Keys.D0 and <= Keys.D9)
-            {
-                Interval interval = (Interval)(e.KeyCode - Keys.D0);
+            checkedListBox_intervals.ItemCheck += CheckedListBox_intervalsOnItemCheck;
+            checkedListBox_intervals.KeyUp += CheckedListBox_intervalsOnKeyUp;
 
-                if (_trainer.VerifyInterval(interval))
-                {
-                    _score++;
-                    label_score.Text = _score.ToString();
-                }
+            _trainer = new PitchTrainer(new TimedMidiPlayer());
+        }
+
+        private void CheckedListBox_intervalsOnKeyUp(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Z)
+            {
+                _trainer.Poke();
+
+                label_from.Text = "--";
+                label_to.Text = "--";
+                label_interval.Text = "--";
+            }
+        }
+
+        private void CheckedListBox_intervalsOnItemCheck(object? sender, ItemCheckEventArgs e)
+        {
+            Interval interval = (Interval)e.Index;
+            e.NewValue = CheckState.Unchecked;
+
+            if (_trainer.VerifyInterval(interval))
+            {
+                _score++;
+                label_score.Text = _score.ToString();
 
                 label_from.Text = _trainer.StartTone.LetterWithOctave;
                 label_to.Text = _trainer.EndTone.LetterWithOctave;

@@ -45,7 +45,7 @@ namespace MusicTrainer
 
         public bool VerifyInterval(Interval guess)
         {
-            if (guess == CorrectInterval)
+            if (_guessing && guess == CorrectInterval)
             {
                 _guessing = false;
                 return true;
